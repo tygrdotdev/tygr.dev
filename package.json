@@ -23,7 +23,8 @@
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-responsive-masonry": "2.7.1",
-		"react-wrap-balancer": "^1.1.1"
+		"react-wrap-balancer": "^1.1.1",
+		"vaul": "^1.1.2"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.0.0",
