@@ -1,4 +1,3 @@
-import { withPayload } from "@payloadcms/next/withPayload";
 import { NextConfig } from "next";
 
 /** @type {import('next').NextConfig} */
@@ -87,4 +86,4 @@ const securityHeaders = [
 	},
 ];
 
-export default withPayload(nextConfig);
+export default nextConfig;

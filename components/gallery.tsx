@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Icons from "./icons";
-import { BlurFade } from "./ui/blur-fade";
-import { Photo, Media } from "@/payload-types";
+import Icons from "@/components/icons";
+import { BlurFade } from "@/components/ui/blur-fade";
 import dynamic from "next/dynamic";
 
 const ResponsiveMasonry = dynamic(
@@ -26,7 +25,10 @@ export default function Gallery({
 	photos,
 	breakPoints,
 }: {
-	photos: Photo[];
+	photos: {
+		image: string;
+		camera: string;
+	}[];
 	breakPoints?: { [key: number]: number } | undefined;
 }) {
 	return (
@@ -41,14 +43,14 @@ export default function Gallery({
 					{photos.map((img, idx) => {
 						return (
 							<BlurFade
-								key={img.id}
+								key={idx}
 								delay={0.25 + idx * 0.05}
 								inView
 							>
 								<div className="flex flex-col p-0 m-0 group">
 									<Image
-										src={(img.image as Media).url ?? ""}
-										alt={(img.image as Media).alt}
+										src={img.image}
+										alt={"Gallery Image"}
 										width={1080}
 										height={1080}
 										quality={80}

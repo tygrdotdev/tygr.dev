@@ -3,8 +3,7 @@
 # Tech stack
 
 - Framework: [NextJS](https://nextjs.org/)
-- Deployment: [Hetzner](https://hetzner.com/) / [Coolify](https://coolify.io)
-- CMS: [Payload](https://payloadcms.com/)
+- Deployment: [Vercel](https://vercel.com)
 - UI: [shacn/ui & Custom](https://ui.shadcn.com/)
 - Styling: [TailwindCSS](https://tailwindcss.com/)
 

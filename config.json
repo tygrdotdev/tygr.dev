@@ -1,0 +1,172 @@
+{
+	"projects": [
+		{
+			"name": "Campsite Chat",
+			"summary": "A new communication platform built from the ground up with Rust and TypeScript to bring you a secure, fast, and sleek chat app.",
+			"featured": true,
+			"category": "Nord Studio",
+			"year": 2025,
+			"image": "/projects/campsite.png",
+			"deploy_url": "https://campsite.chat",
+			"github_url": null
+		},
+		{
+			"name": "Katarogu",
+			"summary": "A free, open-source and community driven manga and anime tracking service",
+			"featured": true,
+			"category": "Nord Studio",
+			"year": 2024,
+			"image": "/projects/katarogu.png",
+			"deploy_url": "https://katarogu.moe",
+			"github_url": "https://github.com/nord-studio/katarogu"
+		},
+		{
+			"name": "caseydyke.com",
+			"summary": "A website for the award-winning zoo photographer, Casey Dyke.",
+			"featured": true,
+			"category": "Contributor",
+			"year": 2024,
+			"image": "/projects/caseydyke.png",
+			"deploy_url": "https://caseydyke.com",
+			"github_url": "https://github.com/masonry-studio/caseydyke.com"
+		},
+		{
+			"name": "tygr.dev",
+			"summary": "My personal website. The place you're at right now!",
+			"featured": true,
+			"category": "Personal",
+			"year": 2023,
+			"image": "/projects/tygr-dev.png",
+			"deploy_url": null,
+			"github_url": "https://github.com/tygrdotdev/tygr.dev"
+		}
+	],
+	"gallery": [
+		{
+			"image": "/gallery/IMG_1.JPG",
+			"camera": "Canon EOS 1300D"
+		},
+		{
+			"image": "/gallery/IMG_2.JPG",
+			"camera": "Canon EOS 1300D"
+		},
+		{
+			"image": "/gallery/IMG_3.JPG",
+			"camera": "iPhone XS"
+		},
+		{
+			"image": "/gallery/IMG_4.png",
+			"camera": "iPhone XS"
+		},
+		{
+			"image": "/gallery/IMG_5.png",
+			"camera": "iPhone 8 Plus"
+		},
+		{
+			"image": "/gallery/IMG_6.JPG",
+			"camera": "Pixel 7"
+		},
+		{
+			"image": "/gallery/IMG_7.png",
+			"camera": "Pixel 7"
+		},
+		{
+			"image": "/gallery/IMG_8.JPG",
+			"camera": "Pixel 7"
+		},
+		{
+			"image": "/gallery/IMG_9.JPG",
+			"camera": "Pixel 7"
+		},
+		{
+			"image": "/gallery/IMG_10.JPG",
+			"camera": "Pixel 7"
+		},
+		{
+			"image": "/gallery/IMG_11.jpeg",
+			"camera": "Pixel 7"
+		},
+		{
+			"image": "/gallery/IMG_12.JPG",
+			"camera": "Pixel 7"
+		},
+		{
+			"image": "/gallery/IMG_13.jpg",
+			"camera": "Pixel 7"
+		},
+		{
+			"image": "/gallery/IMG_14.jpeg",
+			"camera": "iPhone XS"
+		},
+		{
+			"image": "/gallery/IMG_15.jpeg",
+			"camera": "iPhone 16 Pro"
+		},
+		{
+			"image": "/gallery/IMG_17.JPG",
+			"camera": "iPhone 13 Pro"
+		}
+	],
+	"gear": [
+		{
+			"name": "Mac Mini M4",
+			"summary": "My old windows PC got too slow, so I got this awesome peice of kit!",
+			"category": "Desktop",
+			"url": "https://www.apple.com/mac-mini/"
+		},
+		{
+			"name": "Samsung C24F390 Monitor",
+			"summary": "My second monitor, dedicated to displaying Discord, Spotify or Firefox xD",
+			"category": "Desktop",
+			"url": "https://www.amazon.co.uk/Samsung-C24F390-24-Inch-Curved-Monitor/dp/B01BCF06LE"
+		},
+		{
+			"name": "MSI MAG241C Monitor",
+			"summary": "My main monitor with a crisp 144Hz refresh rate.",
+			"category": "Desktop",
+			"url": "https://www.msi.com/Monitor/Optix-MAG241C/Specification"
+		},
+		{
+			"name": "Apple Earbuds",
+			"summary": "Since my Steelseries Arctis 7 headset died, and I don't really play games that often anymore, I went with a lightweight headphones experience when using my desktop.",
+			"category": "Desktop",
+			"url": "https://www.apple.com/uk/shop/product/MWU53ZM/A/earpods-35mm-headphone-plug"
+		},
+		{
+			"name": "Fifine K690 Microphone",
+			"summary": "An extremely good budget mic. Got the mic arm from a relative.",
+			"category": "Desktop",
+			"url": "https://fifinemicrophone.com/products/fifine-k690-usb-microphone"
+		},
+		{
+			"name": "Lofree Touch Mouse",
+			"summary": "Part of the Lofree Block set. A birthday gift from my girlfriend :D",
+			"category": "Desktop",
+			"url": "https://www.lofree.co/products/lofree-touch-pbt-wireless-mouse?variant=44242527551707"
+		},
+		{
+			"name": "Lofree Block Keyboard",
+			"summary": "Part of the Lofree Block set. A birthday gift from my girlfriend :D",
+			"category": "Desktop",
+			"url": "https://www.lofree.co/products/lofree-block-wireless-mechanical-keyboard-1"
+		},
+		{
+			"name": "Steam Deck",
+			"summary": "One of my best purchases of all time, used when travelling and while laying in bed.",
+			"category": "Console",
+			"url": "https://store.steampowered.com/steamdeck"
+		},
+		{
+			"name": "Anbernic RG35XX Plus",
+			"summary": "An awesome little DS/GB emulator, with an nostalgic body.",
+			"category": "Console",
+			"url": "https://anbernic.com/en-gb/products/rg35xx-plus"
+		},
+		{
+			"name": "iPhone 16 Pro",
+			"summary": "My current mobile phone. I've finally caved in and switched back to an iPhone.",
+			"category": "Portable",
+			"url": "https://www.apple.com/iphone-16-pro/"
+		}
+	]
+}
