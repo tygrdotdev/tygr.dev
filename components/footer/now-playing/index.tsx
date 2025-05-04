@@ -13,7 +13,7 @@ export default async function NowPlaying() {
 				<>
 					<div className="flex flex-wrap gap-1 items-center justify-center">
 						<div className="flex flex-row gap-1 items-center">
-							<Icons.Spotify className="w-6 h-6 mr-2" />
+							<Icons.Spotify className="size-6 mr-2" />
 							<span className="text-neutral-500">
 								Listening to:
 							</span>
@@ -24,7 +24,7 @@ export default async function NowPlaying() {
 			) : (
 				<Link href="https://open.spotify.com/user/z4is4ny666qn1njee0k6g77o2?si=275c31679b264854" target="_blank">
 					<Button variant="link" className="px-0 flex flex-row">
-						<Icons.Spotify className="w-6 h-6 mr-2" />
+						<Icons.Spotify className="size-6 mr-2" />
 						Spotify - Nothing Playing
 					</Button>
 				</Link>

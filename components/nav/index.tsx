@@ -4,6 +4,8 @@ import { ThemeToggle } from "../theme/toggle";
 import Link from "next/link";
 import Icons from "@/components/icons";
 import MobileNav from "./mobile";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ChevronDown, Menu } from "lucide-react";
 
 export default function NavBar() {
 	return (
@@ -29,38 +31,56 @@ export default function NavBar() {
 						</div>
 					</Link>
 
-					<div className="hidden sm:flex">
+					<div className="flex flex-row gap-6">
 						<Link href="/">
-							<Button variant="link">About</Button>
+							<Button variant="link" className="px-0">About</Button>
 						</Link>
 						<Link href="/projects">
-							<Button variant="link">Projects</Button>
+							<Button variant="link" className="px-0">Projects</Button>
 						</Link>
 						<Link href="/blog">
-							<Button variant="link">Blog</Button>
+							<Button variant="link" className="px-0">Blog</Button>
 						</Link>
-						<Link href="/gallery">
-							<Button variant="link">Gallery</Button>
-						</Link>
-						<Link href="/gear">
-							<Button variant="link">Gear</Button>
-						</Link>
-						<Link href="/music">
-							<Button variant="link">Music</Button>
-						</Link>
+						<div className="hidden sm:flex flex-row gap-6">
+							<Link href="/gallery">
+								<Button variant="link" className="px-0">Gallery</Button>
+							</Link>
+							<Link href="/gear">
+								<Button variant="link" className="px-0">Gear</Button>
+							</Link>
+							<Link href="/music">
+								<Button variant="link" className="px-0">Music</Button>
+							</Link>
+						</div>
 					</div>
-
-					<div>
+					<div className="block sm:hidden">
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button size="icon" variant="ghost">
+									<Menu className="size-5" />
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent className="flex flex-col">
+								<Link href="/gallery">
+									<DropdownMenuItem>
+										Gallery
+									</DropdownMenuItem>
+								</Link>
+								<Link href="/gear">
+									<DropdownMenuItem>
+										Gear
+									</DropdownMenuItem>
+								</Link>
+								<Link href="/music">
+									<DropdownMenuItem>
+										Music
+									</DropdownMenuItem>
+								</Link>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					</div>
+					<div className="hidden sm:block">
 						<ThemeToggle />
-						<MobileNav>
-							<Button
-								variant="ghost"
-								className="text-black sm:hidden dark:text-white"
-								size="icon"
-							>
-								<Icons.Menu />
-							</Button>
-						</MobileNav>
 					</div>
 				</div>
 			</nav>

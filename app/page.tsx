@@ -16,18 +16,18 @@ export default async function Home() {
 	return (
 		<main className="flex flex-col items-center justify-center w-full">
 			<div className="flex flex-col gap-4 px-2 py-8 max-w-[800px] w-full">
-				<div className="flex flex-row gap-2 sm:gap-4">
-					<div className="flex flex-row gap-2 justify-center items-start h-full max-h-[132px]">
-						<div className="flex-col items-center hidden gap-1 justify-evenly sm:flex">
+				<div className="flex flex-row gap-2 sm:gap-4 h-full">
+					<div className="flex flex-row gap-2 justify-center items-start h-full max-h-[136px]">
+						<div className="flex-col h-[136px] justify-between hidden sm:flex">
 							<Link
 								href="https://github.com/tygrdotdev"
 								target="_blank"
 							>
 								<Button
 									size={"icon"}
-									className="px-2 py-1 h-[40px] w-[40px] flex items-center"
+									className="size-10"
 								>
-									<Icons.Github className="w-full h-full" />
+									<Icons.Github className="size-6" />
 								</Button>
 							</Link>
 							<Link
@@ -36,9 +36,9 @@ export default async function Home() {
 							>
 								<Button
 									size={"icon"}
-									className="px-2 py-1 h-[40px] w-[40px]"
+									className="size-10"
 								>
-									<Icons.Bluesky className="w-full h-full" />
+									<Icons.Bluesky className="size-5" />
 								</Button>
 							</Link>
 							<Link
@@ -47,16 +47,16 @@ export default async function Home() {
 							>
 								<Button
 									size={"icon"}
-									className="px-2 py-1 h-[40px] w-[40px]"
+									className="size-10"
 								>
-									<Icons.Instagram className="w-full h-full" />
+									<Icons.Instagram className="size-6" />
 								</Button>
 							</Link>
 						</div>
 						<Image
-							width={132}
-							height={132}
-							className="max-h-[132px] min-w-[132px] w-full rounded-md hidden md:block"
+							width={136}
+							height={136}
+							className="max-h-[136px] max-w-[136px] w-full rounded-md hidden md:block border"
 							src="/profile.png"
 							alt="Avatar"
 						/>
@@ -77,7 +77,6 @@ export default async function Home() {
 											"tygrdev",
 											"tygrdotdev",
 											"tygrxqt",
-											"whokilledcold",
 										]}
 									/>
 								</span>
@@ -285,10 +284,10 @@ export default async function Home() {
 							</div>
 							<Link href="/projects">
 								<Button
-									size="icon"
-									className="flex flex-row items-center gap-2 w-9 h-9"
+									size={"icon"}
+									className="size-10"
 								>
-									<Icons.LayoutGrid className="p-0" />
+									<Icons.LayoutGrid className="size-5" />
 								</Button>
 							</Link>
 						</div>

@@ -40,14 +40,14 @@ export function TextBlockWrapper({
 				</CollapsibleContent>
 				<div
 					className={cn(
-						"absolute flex items-center justify-center bg-gradient-to-b from-neutral-100/30 to-neutral-100/90 dark:from-neutral-900/30 dark:to-neutral-900/90 p-2",
+						"absolute flex items-center justify-center bg-linear-to-b from-neutral-100/30 to-neutral-100/90 dark:from-neutral-900/30 dark:to-neutral-900/90 p-2",
 						isOpened
 							? "inset-x-0 bottom-0 h-12 from-transparent to-transparent dark:from-transparent dark:to-transparent"
 							: "inset-0"
 					)}
 				>
 					<CollapsibleTrigger asChild>
-						<Button variant="primary" className="h-8 text-xs">
+						<Button className="h-8 text-xs">
 							{isOpened ? "Collapse" : expandButtonTitle}
 						</Button>
 					</CollapsibleTrigger>
