@@ -5,7 +5,7 @@ import { TextBlockWrapper } from "@/components/ui/text-block-wrapper";
 import { Button } from "@/components/ui/button";
 import Icons from "@/components/icons";
 import NameSwitch from "@/components/name-switch";
-import ProjectCard from "./projects/card";
+import ProjectCard from "../components/projects/card";
 import Config from "@/config.json";
 
 export default async function Home() {
@@ -297,21 +297,6 @@ export default async function Home() {
 							))}
 						</div>
 					</div>
-					<Link href="/discord">
-						<div className="flex flex-col gap-2 border border-black/10 dark:border-white/10 rounded-lg w-full p-4">
-							<div className="flex flex-row gap-2 items-center justify-between">
-								<h2 className="text-xl md:text-2xl font-bold font-display">
-									I have a Discord server!
-								</h2>
-								<Icons.External className="w-6 h-6" />
-							</div>
-							<p className="text-neutral-500 dark:text-neutral-400">
-								I'm pretty active over there, and you can find
-								some behind the scenes stuff under the #journal
-								channel.
-							</p>
-						</div>
-					</Link>
 				</div>
 			</div>
 		</main>

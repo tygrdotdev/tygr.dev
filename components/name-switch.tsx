@@ -27,8 +27,8 @@ export default function NameSwitch(
 			if (newIndex === lastIndex) {
 				newIndex = (newIndex + 1) % names.length;
 			}
-			setLastIndex(newIndex);
 			setName(names[newIndex]);
+			setLastIndex(newIndex);
 		}, 4000);
 
 		const animationLoop = () => {
