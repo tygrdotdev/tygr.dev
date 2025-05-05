@@ -1,11 +1,9 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "../theme/toggle";
+import { ThemeToggle } from "./theme/toggle";
 import Link from "next/link";
-import Icons from "@/components/icons";
-import MobileNav from "./mobile";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
 export default function NavBar() {
 	return (
