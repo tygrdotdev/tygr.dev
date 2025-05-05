@@ -2,6 +2,7 @@ import { NextConfig } from "next";
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
+	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 	images: {
 		remotePatterns: [
 			{ hostname: "lastfm.freetls.fastly.net" },
