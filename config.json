@@ -1,7 +1,7 @@
 {
 	"projects": [
 		{
-			"name": "Campsite Chat",
+			"name": "Campsite",
 			"summary": "A new communication platform built from the ground up with Rust and TypeScript to bring you a secure, fast, and sleek chat app.",
 			"featured": true,
 			"category": "Nord Studio",
@@ -9,6 +9,16 @@
 			"image": "/projects/campsite.png",
 			"deploy_url": "https://campsite.chat",
 			"github_url": null
+		},
+		{
+			"name": "Miru",
+			"summary": "A free, open-source and fully customisable status page and monitoring service.",
+			"featured": true,
+			"category": "Nord Studio",
+			"year": 2025,
+			"image": "/projects/miru.png",
+			"deploy_url": "https://miru.nordstud.io",
+			"github_url": "https://github.com/nord-studio/miru"
 		},
 		{
 			"name": "Katarogu",
@@ -29,16 +39,6 @@
 			"image": "/projects/caseydyke.png",
 			"deploy_url": "https://caseydyke.com",
 			"github_url": "https://github.com/masonry-studio/caseydyke.com"
-		},
-		{
-			"name": "tygr.dev",
-			"summary": "My personal website. The place you're at right now!",
-			"featured": true,
-			"category": "Personal",
-			"year": 2023,
-			"image": "/projects/tygr-dev.png",
-			"deploy_url": null,
-			"github_url": "https://github.com/tygrdotdev/tygr.dev"
 		}
 	],
 	"gallery": [

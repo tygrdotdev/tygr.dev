@@ -1,4 +1,4 @@
-import ProjectCard from "@/app/projects/card";
+import ProjectCard from "@/components/projects/card";
 import Config from "@/config.json";
 
 export default async function ProjectsPage() {

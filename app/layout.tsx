@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 import { Metadata } from "next";
 import NavBar from "@/components/nav";
 import { ThemeProvider } from "@/components/theme/provider";
+import { baseUrl } from "@/app/sitemap";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -29,7 +30,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "tygr.dev",
+	metadataBase: new URL(baseUrl),
+	title: {
+		default: 'tygr.dev',
+		template: '%s | tygr.dev',
+	},
 	description:
 		"yo, i'm ty! aka tygrdev. a full-stack web & app developer and founder of nord studio.",
 	keywords: [
@@ -40,6 +45,25 @@ export const metadata: Metadata = {
 		"tyger796",
 		"tyger",
 	],
+	openGraph: {
+		title: 'tygr.dev',
+		description: "yo, i'm ty! aka tygrdev. a full-stack web & app developer and founder of nord studio.",
+		url: baseUrl,
+		siteName: 'tygr.dev',
+		locale: 'en_GB',
+		type: 'website',
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			'max-video-preview': -1,
+			'max-image-preview': 'large',
+			'max-snippet': -1,
+		},
+	},
 };
 
 export default function RootLayout({
@@ -55,7 +79,7 @@ export default function RootLayout({
 		>
 			<body className="bg-neutral-100 dark:bg-neutral-900">
 				<div
-					className="w-full min-h-screen p-2 sm:p-4"
+					className="w-full min-h-screen p-2 sm:p-4 font-sans"
 					vaul-drawer-wrapper=""
 				>
 					<ThemeProvider

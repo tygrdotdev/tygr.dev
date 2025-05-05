@@ -41,7 +41,7 @@ export default function TrackName({ track }: { track: Status }) {
 				onMouseLeave={() => setHover(false)}
 			>
 				<Button variant="link" className="px-0">
-					<span className="overflow-ellipsis line-clamp-1 w-fit">
+					<span className="text-ellipsis line-clamp-1 w-fit">
 						{track.item!.name} -{" "}
 						{track.item!.artists.map((artist) => artist.name).join(", ")}
 					</span>

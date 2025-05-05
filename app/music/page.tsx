@@ -1,5 +1,5 @@
 import { getTopAlbums } from "@/lib/lastfm";
-import { AlbumCard } from "./card";
+import { AlbumCard } from "../../components/music/card";
 import { truncate } from "@/lib/utils";
 
 export default async function MusicPage() {

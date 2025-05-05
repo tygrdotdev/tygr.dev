@@ -15,24 +15,24 @@ export function ThemeToggle() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild className="outline-none">
-				<Button variant="ghost" size="icon">
-					<Icons.Sun className="block text-black dark:hidden" />
-					<Icons.Moon className="hidden dark:block dark:text-white" />
+			<DropdownMenuTrigger asChild className="outline-hidden">
+				<Button variant="outline" size="icon">
+					<Icons.Sun className="block text-black dark:hidden size-5" />
+					<Icons.Moon className="hidden dark:block dark:text-white size-5" />
 					<span className="sr-only">Toggle theme</span>
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
 				<DropdownMenuItem onClick={() => setTheme("light")}>
-					<Icons.Sun className="w-4 h-4 mr-2" />
+					<Icons.Sun className="size-4" />
 					<span>Light</span>
 				</DropdownMenuItem>
 				<DropdownMenuItem onClick={() => setTheme("dark")}>
-					<Icons.Moon className="w-4 h-4 mr-2" />
+					<Icons.Moon className="size-4" />
 					<span>Dark</span>
 				</DropdownMenuItem>
 				<DropdownMenuItem onClick={() => setTheme("system")}>
-					<Icons.Laptop className="w-4 h-4 mr-2" />
+					<Icons.Laptop className="size-4" />
 					<span>System</span>
 				</DropdownMenuItem>
 			</DropdownMenuContent>

@@ -51,12 +51,12 @@ export default function Gallery({
 									<Image
 										src={img.image}
 										alt={"Gallery Image"}
-										width={1080}
-										height={1080}
+										width={1200}
+										height={1200}
 										quality={80}
 										className="object-cover object-center w-full h-full border rounded-lg border-black/10 dark:border-white/10"
 									/>
-									<div className="w-full backdrop-blur">
+									<div className="w-full backdrop-blur-sm">
 										<div className="absolute bottom-0 items-center w-full p-4 text-white transition-opacity border-t-2 rounded-b-lg opacity-0 group-hover:opacity-100 border-black/10 dark:border-white/10 bg-black/70">
 											<div className="flex flex-row items-center gap-2">
 												<Icons.Camera className="w-4 h-4 font-medium" />
