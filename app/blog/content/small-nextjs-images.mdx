@@ -8,10 +8,10 @@ hero: "/gallery/IMG_11.jpeg"
 # Introduction
 
 Recently, I've been working on a project over at Nord Studio called [Miru](https://miru.nordstud.io). It's a free, open-source, self-hostable, and fully customisable status page and monitoring service
-which uses Docker as its primary deployment method.
+which uses Docker as the primary deployment method.
 
 While I was testing deployment, I used a "this will do for now" approach for the Docker images and moved on to other features.
-Initially, this approach worked well enough, but I soon realized that the Docker image for the web dashboard had grown to an enormous **2.19GB**!
+What I failed to notice was that the Docker image for Miru's web dashboard had grown to an enormous **2.19GB**!
 
 I thought it was time to investigate, see if I could reduce the size, and share my findings with you.
 
@@ -21,7 +21,7 @@ The first thing I was suspicious of was the way I was handling database migratio
 
 During development, I used the `drizzle-kit` CLI to generate SQL migration files and push them to the database using `pnpm drizzle generate` and `pnpm drizzle migrate`.
 
-My "this will do for now" mindset lead me to adding `pnpm drizzle migrate` to my start script and adding a step to install _all_ dependencies in the `RUNNER` stage of the Dockerfile...
+My "this will do for now" mindset lead me to adding `pnpm drizzle migrate` to the start script and adding a step to install _all_ dependencies in the `runner` stage of the Dockerfile...
 
 ```dockerfile
 FROM base AS runner
@@ -60,7 +60,7 @@ Yikes! I'm not sure what I was thinking, but we live and we learn, right? (ï¿£ â
 
 I'll figure out a better way to handle database migrations later, but for now, I wanted to focus on reducing the size of the Docker image.
 
-Removing all the database migration related steps, here's what the `RUNNER` stage looks like:
+After removing all the database migration related steps, here's what the `runner` stage looks like:
 
 ```dockerfile
 FROM base AS runner
@@ -112,7 +112,7 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 ```
 
-We then need to change the `RUNNER` stage to copy the standalone build files instead of the entire `.next` folder:
+We then need to change the `runner` stage to copy the standalone build files instead of the entire `.next` folder:
 
 ```dockerfile
 FROM base AS runner
@@ -196,9 +196,9 @@ And started the app directly with `node`:
 CMD ["node", "./apps/web/server.js"]
 ```
 
-Rebuilding the Docker image again and the size dropped from **256.1MB** to a puny **187.4MB**!
+Rebuilding the Docker image again shows that the size dropped from **256.1MB** to a puny **187MB**!
 
-Going from **2.19GB** to **187.4MB** is a massive improvement, and I couldn't be happier with the results. However, we don't have database migrations yet.
+Great! However, we don't have database migrations yet.
 
 ## Migrating during runtime
 
@@ -306,7 +306,8 @@ USER nextjs
 CMD ["node", "./apps/web/server.js"]
 ```
 
-Rebuilding the image one last time reveals the size of the Docker image has increased slightly to **187.4MB**. A major improvement from the original **2.19GB** image!
+Rebuilding the image one last time reveals the size of the Docker image has increased slightly to **187.4MB**.
+Going from **2.19GB** to **187.4MB** is a massive improvement, and I couldn't be happier with the results.
 
 ## Conclusion
 
