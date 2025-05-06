@@ -5,6 +5,8 @@ import { baseUrl } from '@/app/sitemap'
 import Image from 'next/image'
 import readingTime from 'reading-time'
 
+import "../../highlight.css"
+
 export async function generateStaticParams() {
 	let posts = getBlogPosts()
 
@@ -121,7 +123,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
 						className="mt-4 border rounded-lg border-black/10 dark:border-white/10"
 					/>
 				</div>
-				<article className=" px-2 prose prose-quoteless prose-neutral dark:prose-invert">
+				<article className="prose prose-quoteless prose-neutral dark:prose-invert">
 					<CustomMDX source={post.content} />
 				</article>
 			</div>
