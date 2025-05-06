@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{ hostname: "lastfm.freetls.fastly.net" },
 			{ hostname: "i.scdn.co" },
+			{ hostname: "c.tenor.com" }
 		],
 	},
 	async headers() {

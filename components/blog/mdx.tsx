@@ -1,8 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import { highlight } from 'sugar-high'
 import React from 'react'
+
+import rehypeHighlight from 'rehype-highlight'
+import langTs from "highlight.js/lib/languages/typescript"
+import langDockerfile from "highlight.js/lib/languages/dockerfile"
 
 function Table({ data }: any) {
 	let headers = data.headers.map((header: any, index: any) => (
@@ -45,7 +48,7 @@ function CustomLink(props: any) {
 }
 
 function RoundedImage(props: any) {
-	return <Image alt={props.alt} className="rounded-lg" {...props} />;
+	return <Image alt={props.alt} width={800} height={400} className="rounded-lg" {...props} />;
 }
 
 function slugify(str: string) {
@@ -79,11 +82,6 @@ function createHeading(level: number) {
 	};
 }
 
-function Code({ children, ...props }: any) {
-	let codeHTML = highlight(children);
-	return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
-}
-
 const components = {
 	h1: createHeading(1),
 	h2: createHeading(2),
@@ -94,7 +92,6 @@ const components = {
 	img: RoundedImage,
 	Image: RoundedImage,
 	a: CustomLink,
-	code: Code,
 	Table,
 };
 
@@ -103,6 +100,13 @@ export function CustomMDX(props: any) {
 		<MDXRemote
 			{...props}
 			components={{ ...components, ...(props.components || {}) }}
+			options={{
+				mdxOptions: {
+					rehypePlugins: [
+						[rehypeHighlight, { languages: { dockerfile: langDockerfile, ts: langTs } }],
+					]
+				}
+			}}
 		/>
 	)
 }
