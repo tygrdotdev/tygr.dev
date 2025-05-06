@@ -94,7 +94,7 @@ Still a bit large, but we're getting somewhere!
 ## Standalone builds
 
 In the Next.js config file, there is an `output` option that allows you to specify the output format of the build.
-By default, Next.js generates a `.next` folder with all the necessary files for your app but doesn't account for any dependencies used.
+By default, Next.js generates a `.next` folder with all the necessary files for your app but doesn't account for any dependencies the app uses.
 
 This results with a Docker image that contains your entire `node_modules` folder, which can be quite large. This is where the `standalone` option comes in.
 
@@ -236,7 +236,7 @@ Since we are only interested in running the migrations when the runtime is Node.
 We then dynamically import the `migrate` function from the `drizzle-orm` package and the `db` client from our own code.
 Finally, we call the `migrate` function with the database client and the path to the migrations folder.
 
-Now that migrations are ran during runtime, I can remove all the steps related to installing dependencies during the `RUNNER` stage.
+Now every time the app starts, it will run the migration function before accepting any requests.
 
 Our final Dockerfile looks like this:
 
@@ -250,9 +250,7 @@ RUN apk update ; apk add --no-cache libc6-compat nodejs pnpm
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
-###
-### prune - Prune the web app from the monorepo
-###
+# Prune the web app from the monorepo
 FROM base AS prune
 
 # Set working directory
@@ -262,9 +260,7 @@ WORKDIR /app
 COPY . .
 RUN pnpm dlx turbo prune --scope=@miru/web --docker
 
-###
-### builder - Install dependencies and build the project
-###
+# Install dependencies and build the project
 FROM base AS builder
 
 WORKDIR /app
@@ -283,9 +279,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=prune /app/out/full/ .
 RUN pnpm dlx turbo run build --filter=@miru/web
 
-###
-### Runner
-###
 FROM base AS runner
 WORKDIR /app
 
@@ -313,14 +306,14 @@ USER nextjs
 CMD ["node", "./apps/web/server.js"]
 ```
 
-Rebuilding the image one last time reveals the the size of the Docker image has increased slightly to **187.4MB**.
+Rebuilding the image one last time reveals the size of the Docker image has increased slightly to **187.4MB**. A major improvement from the original **2.19GB** image!
 
 ## Conclusion
 
 It goes to show that when you take the time to investigate and optimize your code, you can achieve some pretty impressive results.
 I hope you found this article helpful and that it inspires you to take a closer look at your own Docker images and see if there are any optimizations you can make.
 
-If you have any questions or suggestions, feel free to reach out to me on [BlueSky](https://bsky.app/profile/tygr.dev) or join my [Discord server](/discord).
+If you have any questions or suggestions, feel free to reach out to me on [BlueSky](https://bsky.app/profile/tygr.dev) or join my [Discord server](https://nordstud.io/discord).
 
 If you want to see the full code, check out the [Miru GitHub repository](https://github.com/nord-studio/miru).
 
