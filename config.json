@@ -37,6 +37,7 @@
 			"category": "Nord Studio",
 			"year": 2025,
 			"image": "/projects/ripojitori.png",
+			"deploy_url": null,
 			"github_url": "https://github.com/nord-studio/ripojitori"
 		}
 	],
