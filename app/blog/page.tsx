@@ -25,14 +25,14 @@ function BlogPosts() {
 				.map((post) => (
 					<Link
 						key={post.slug}
-						className="flex flex-col "
+						className="flex flex-col pb-4 w-full"
 						href={`/blog/${post.slug}`}
 					>
 						<div className="flex flex-row gap-2 items-center justify-between">
 							<p className="text-neutral-900 dark:text-neutral-100 tracking-tight hover:underline">
 								{post.metadata.title}
 							</p>
-							<p className="text-neutral-600 dark:text-neutral-400 w-[100px] tabular-nums">
+							<p className="text-neutral-600 dark:text-neutral-400 w-[120px] tabular-nums">
 								{formatDate(post.metadata.publishedAt, false)}
 							</p>
 						</div>

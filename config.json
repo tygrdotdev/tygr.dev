@@ -25,20 +25,19 @@
 			"summary": "A free, open-source and community driven manga and anime tracking service",
 			"featured": true,
 			"category": "Nord Studio",
-			"year": 2024,
+			"year": 2025,
 			"image": "/projects/katarogu.png",
 			"deploy_url": "https://katarogu.moe",
 			"github_url": "https://github.com/nord-studio/katarogu"
 		},
 		{
-			"name": "caseydyke.com",
-			"summary": "A website for the award-winning zoo photographer, Casey Dyke.",
+			"name": "Ripojitori",
+			"summary": "A free, open-source, community driven and crowdsourced encyclopedia of manga and anime.",
 			"featured": true,
-			"category": "Contributor",
-			"year": 2024,
-			"image": "/projects/caseydyke.png",
-			"deploy_url": "https://caseydyke.com",
-			"github_url": "https://github.com/masonry-studio/caseydyke.com"
+			"category": "Nord Studio",
+			"year": 2025,
+			"image": "/projects/ripojitori.png",
+			"github_url": "https://github.com/nord-studio/ripojitori"
 		}
 	],
 	"gallery": [
@@ -140,13 +139,13 @@
 		},
 		{
 			"name": "Lofree Touch Mouse",
-			"summary": "Part of the Lofree Block set. A birthday gift from my girlfriend :D",
+			"summary": "Part of the Lofree Block set. A birthday gift from my friend :D",
 			"category": "Desktop",
 			"url": "https://www.lofree.co/products/lofree-touch-pbt-wireless-mouse?variant=44242527551707"
 		},
 		{
 			"name": "Lofree Block Keyboard",
-			"summary": "Part of the Lofree Block set. A birthday gift from my girlfriend :D",
+			"summary": "Part of the Lofree Block set. A birthday gift from my friend :D",
 			"category": "Desktop",
 			"url": "https://www.lofree.co/products/lofree-block-wireless-mechanical-keyboard-1"
 		},
