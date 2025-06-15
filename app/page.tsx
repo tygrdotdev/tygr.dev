@@ -64,7 +64,7 @@ export default async function Home() {
 
 					<div className="flex flex-col items-start">
 						<small className="text-sm text-neutral-500">
-							any ~ he/him • 18 • UK
+							any ~ he/him • 19 • UK
 						</small>
 						<span className="items-center w-full text-2xl font-bold tracking-[0.010em] sm:text-3xl font-display font">
 							<Balancer>
