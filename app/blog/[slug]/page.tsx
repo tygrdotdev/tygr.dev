@@ -92,7 +92,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
 					<div className="flex flex-row items-center justify-between gap-4">
 						<div className="flex flex-row items-center gap-2">
 							<Image
-								src="/profile.png"
+								src="/profile.jpeg"
 								alt="T"
 								aria-label="Author avatar"
 								width={28}

@@ -57,7 +57,7 @@ export default async function Home() {
 							width={136}
 							height={136}
 							className="max-h-[136px] max-w-[136px] w-full rounded-md hidden md:block border"
-							src="/profile.png"
+							src="/profile.jpeg"
 							alt="Avatar"
 						/>
 					</div>
