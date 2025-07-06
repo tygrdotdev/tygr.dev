@@ -159,7 +159,7 @@ const data = await getNowPlaying();
 		listening to
 	</div>
 	<a class="p-1 flex flex-col gap-2 w-full grayscale hover:grayscale-0" href={data.item!.external_urls.spotify}>
-		<Image src={data.item!.album.images[0].url} alt={data.item!.name} width={200} height={200} class="w-full border border-white/10" />
+		<img src={data.item!.album.images[0].url} alt={data.item!.name} width={200} height={200} class="w-full border border-white/10" />
 			<span class="px-0.5">{data.item!.name} - {data.item!.artists.map((artist) => artist.name).join(", ")}</span>
 		</a>
 </div>
