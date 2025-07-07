@@ -1,13 +1,14 @@
 ---
 import Card from "@/components/card.astro";
 import Link from "@/components/link.astro";
+import Tooltip from "@/components/tooltip.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout>
-	<div class="flex flex-col gap-3 items-start w-full">
+	<div class="flex flex-col items-start w-full gap-3">
 		<div class="flex flex-col">
-			<div class="bg-black text-white px-2 py-1 text-2xl font-neue-haas-grotesk w-full">
+			<div class="w-full px-2 py-1 text-2xl text-white bg-black font-neue-haas-grotesk">
 				about me
 			</div>
 			<div class="p-2.5 flex flex-row items-start w-full border border-black">
@@ -23,84 +24,164 @@ import Layout from "@/layouts/Layout.astro";
 			<span>
 				Hover over each items to learn more.
 			</span>
-			<div class="grid grid-cols-2 gap-4 w-full">
+			<div class="grid w-full grid-cols-2 gap-4">
 				<div class="flex flex-col items-start w-full">
-					<div class="flex flex-row gap-2 items-center w-full">
+					<div class="flex flex-row items-center w-full gap-2">
 						<svg class="size-4" data-name="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.82 20"><path d="M21.82 5.45c0-3.01-2.55-5.45-5.68-5.45-2.35 0-4.36 1.36-5.23 3.31C10.04 1.36 8.03 0 5.68 0 2.55 0 0 2.44 0 5.45 0 14.2 10.91 20 10.91 20s10.91-5.79 10.91-14.55" style="fill:#000;stroke-width:0"/></svg>
-						<span class="font-neue-haas-grotesk text-xl">
+						<span class="text-xl font-neue-haas-grotesk">
 							likes
 						</span>
 					</div>
 					<ul class="grid grid-cols-2 list-inside list-[square] w-full">
 						<li>
-							cats
+							<Tooltip content="they're all so baby so cute">
+								<span>
+									cats
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							music
+							<Tooltip content="#1 wallows and machine girl fan">
+								<span>
+									music
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							anime
+							<Tooltip content="'I want you to help me live' - Shōya Ishida">
+								<span>
+									anime
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							virtual reality
+							<Tooltip content="play boneworks, it's a life changing experience">
+								<span>
+									virtual reality
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							console modding
+							<Tooltip content="i'd marry homebrew if i could">
+								<span>
+									console modding
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							nature / outdoors
+							<Tooltip content="appreciate it while you can">
+								<span>
+									nature / outdoors
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							biking
+							<Tooltip content="such a versatile way of transport and exercise">
+								<span>
+									biking
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							swiss design
+							<Tooltip content="helvetica my beloved <3">
+								<span>
+									swiss design
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							fajitas
+							<Tooltip content="literally the perfect food">
+								<span>
+									fajitas
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							handhelds
+							<Tooltip content="old handhelds are superior, ds and psp on top!">
+								<span>
+									handhelds
+								</span>
+							</Tooltip>
 						</li>
 					</ul>
 				</div>
 				<div class="flex flex-col items-start w-full">
-					<div class="flex flex-row gap-2 items-center w-full">
+					<div class="flex flex-row items-center w-full gap-2">
 						<svg class="size-4" data-name="x-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path style="fill:#000;stroke-width:0" d="M15.71 20 10 14.29 4.29 20 0 15.71 5.71 10 0 4.29 4.29 0 10 5.71 15.71 0 20 4.29 14.29 10 20 15.71 15.71 20z"/></svg>
-						<span class="font-neue-haas-grotesk text-xl">
+						<span class="text-xl font-neue-haas-grotesk">
 							dislikes
 						</span>
 					</div>
 					<ul class="grid grid-cols-2 list-inside list-[square] w-full">
 						<li>
-							sticky things
+							<Tooltip content="makes my brain scream and sob">
+								<span>
+									sticky things
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							being hot
+							<Tooltip content="gives me headaches and makes me sticky">
+								<span>
+									being hot
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							tight clothes
+							<Tooltip content="i'm very insecure about my body">
+							<span>
+								tight clothes
+							</span>
+						</Tooltip>
 						</li>
 						<li>
-							parties
+							<Tooltip content="it's too loud, it smells like vomit, and there are people i don't know">
+							<span>
+								parties
+							</span>
+						</Tooltip>
 						</li>
 						<li>
-							sleeping early
+							<Tooltip content="the night is peaceful, why waste it?">
+							<span>
+								sleeping early
+							</span>
+							</Tooltip>	
 						</li>
 						<li>
-							flying bugs
+							<Tooltip content="GET AWAY FROM ME AHHHH DIE DIE DIE DIE DIE">
+								<span>
+									flying bugs
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							writing css
+							<Tooltip content="i am overwhelmed and want to go home">
+							<span>
+								loud noises
+							</span>
+							</Tooltip>
 						</li>
 						<li>
-							electron
+							<Tooltip content="was a mistake, a sad excuse of a desktop 'app'">
+								<span>
+									electron
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							generative ai
+							<Tooltip content="do i really need to explain this one?">
+								<span>
+									generative ai
+								</span>
+							</Tooltip>
 						</li>
 						<li>
-							country music
+							<Tooltip content="i love all music, EXCEPT country.">
+								<span>
+									country music
+								</span>
+							</Tooltip>
 						</li>
 					</ul>
 				</div>
