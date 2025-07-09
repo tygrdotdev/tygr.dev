@@ -1,0 +1,99 @@
+---
+import Tooltip from "@/components/tooltip.astro";
+import Image from "astro/components/Image.astro"
+
+export interface TopAlbumData {
+	topalbums: Topalbums;
+}
+
+export interface Topalbums {
+	album: Album[];
+	"@attr": Attr2;
+}
+
+export interface Album {
+	artist: Artist;
+	image: Image[];
+	mbid: string;
+	url: string;
+	playcount: string;
+	"@attr": Attr;
+	name: string;
+}
+
+export interface Artist {
+	url: string;
+	name: string;
+	mbid: string;
+}
+
+export interface Image {
+	size: string;
+	"#text": string;
+}
+
+export interface Attr {
+	rank: string;
+}
+
+export interface Attr2 {
+	user: string;
+	totalPages: string;
+	page: string;
+	perPage: string;
+	total: string;
+}
+
+export async function getTopAlbums(): Promise<TopAlbumData | null> {
+	const data = await fetch(
+		`https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${import.meta.env.LASTFM_USER}&api_key=${import.meta.env.LASTFM_API_KEY}&format=json`,
+		{ headers: {
+			"Cache-Control": "max-age=86400"
+		}}
+	)
+		.then(async (res) => {
+			const json = await res.json();
+			return json;
+		})
+		.catch((err) => {
+			console.error(err);
+			return null;
+		});
+
+	return data;
+}
+
+export const truncate = (str: string, n: number) =>
+  str.length > n ? str.substring(0, n - 1) + "..." : str;
+
+const albumData = await getTopAlbums();
+---
+
+{albumData ?
+	<div class="grid gap-4 grid-cols-3">
+		{albumData?.topalbums.album.slice(0, 48).map((album, i) => {
+			return (
+				<Tooltip content={"[#" + (i + 1) + "] " + truncate(album.name, 75) + " - " + album.artist.name}>
+					<a
+						href={album.url}
+						rel="noopener noreferrer"
+						target="_blank"
+						class="group flex items-end	size-full border-black border"
+					>
+						<Image
+							src={album.image[3]["#text"]}
+							width={200}
+							height={200}
+							alt={album.name}
+							class="opacity-100 w-full h-full grayscale group-hover:grayscale-0"
+						/>
+					</a>
+				</Tooltip>
+			);
+		})}
+	</div>
+: 
+	<p class="text-neutral-500 dark:text-neutral-400">
+		sorry, something went wrong fetching the top album data :c
+	</p>
+}
