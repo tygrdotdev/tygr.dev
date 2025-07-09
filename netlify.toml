@@ -1,2 +1,2 @@
 [images]
-  remote_images = ["https://i.scdn.co/.*"]
+  remote_images = ["https://i.scdn.co/.*", "https://lastfm.freetls.fastly.net/.*"]
