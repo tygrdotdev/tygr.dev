@@ -1,7 +1,7 @@
 {
 	"name": "tygr.dev",
 	"type": "module",
-	"version": "0.0.1",
+	"version": "4.0.0",
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
@@ -10,8 +10,7 @@
 	},
 	"dependencies": {
 		"@astrojs/mdx": "^4.3.1",
-		"@astrojs/netlify": "^6.5.1",
-		"@floating-ui/dom": "^1.7.2",
+		"@astrojs/node": "^9.3.0",
 		"@tailwindcss/typography": "^0.5.16",
 		"@tailwindcss/vite": "^4.1.11",
 		"astro": "^5.12.0",
