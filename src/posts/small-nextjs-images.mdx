@@ -1,0 +1,321 @@
+---
+title: "Minimizing Docker Images for Next.js"
+publishedAt: "2025-04-08"
+summary: "How I reduced the size of my Next.js Docker images from 2.19GB to 187.4MB!"
+hero: "/gallery/IMG_11.webp"
+---
+
+# Introduction
+
+Recently, I've been working on a project over at Nord Studio called [Miru](https://miru.nordstud.io). It's a free, open-source, self-hostable, and fully customisable status page and monitoring service
+which uses Docker as the primary deployment method.
+
+While I was testing deployment, I used a "this will do for now" approach for the Docker images and moved on to other features.
+What I failed to notice was that the Docker image for Miru's web dashboard had grown to an enormous **2.19GB**!
+
+I thought it was time to investigate, see if I could reduce the size, and share my findings with you.
+
+## Drizzle ORM migrations
+
+The first thing I was suspicious of was the way I was handling database migrations with [Drizzle ORM](https://orm.drizzle.team/docs/migrations).
+
+During development, I used the `drizzle-kit` CLI to generate SQL migration files and push them to the database using `pnpm drizzle generate` and `pnpm drizzle migrate`.
+
+My "this will do for now" mindset lead me to adding `pnpm drizzle migrate` to the start script and adding a step to install _all_ dependencies in the `runner` stage of the Dockerfile...
+
+```dockerfile
+FROM base AS runner
+WORKDIR /app
+
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy the package.json, and install dependencies for drizzle ORM
+COPY --from=builder /app/apps/web/package.json .
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --no-frozen-lockfile
+
+# Copy the drizzle config and migrations folder
+COPY --from=builder /app/apps/web/drizzle.config.ts .
+COPY --from=builder /app/apps/web/lib/db/migrations ./lib/db/migrations
+
+# Copy the Next.js app
+COPY --from=builder /app/apps/web/.next ./.next
+COPY --from=builder /app/apps/web/public ./public
+
+EXPOSE 3000
+
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
+
+USER nextjs
+
+# This runs: pnpm drizzle migrate ; next start
+CMD ["pnpm", "start"]
+```
+
+![](https://c.tenor.com/XWXoX_no0awAAAAC/tenor.gif)
+
+Yikes! I'm not sure what I was thinking, but we live and we learn, right? (￣ ▽ ￣\*)ゞ
+
+I'll figure out a better way to handle database migrations later, but for now, I wanted to focus on reducing the size of the Docker image.
+
+After removing all the database migration related steps, here's what the `runner` stage looks like:
+
+```dockerfile
+FROM base AS runner
+WORKDIR /app
+
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy the package.json
+COPY --from=builder /app/apps/web/package.json .
+
+# Copy the Next.js app
+COPY --from=builder /app/apps/web/.next ./.next
+COPY --from=builder /app/apps/web/public ./public
+
+EXPOSE 3000
+
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
+
+USER nextjs
+
+# This runs: next start
+CMD ["pnpm", "start"]
+```
+
+After rebuilding the image, the size of the Docker image dropped from **2.19GB** to **1.18GB**.
+Still a bit large, but we're getting somewhere!
+
+## Standalone builds
+
+In the Next.js config file, there is an `output` option that allows you to specify the output format of the build.
+By default, Next.js generates a `.next` folder with all the necessary files for your app but doesn't account for any dependencies the app uses.
+
+This results with a Docker image that contains your entire `node_modules` folder, which can be quite large. This is where the `standalone` option comes in.
+
+By setting `output: "standalone"`, Next.js performs an analysis of your application to determine which files and dependencies are required for production. The result is a trimmed down version of the `.next` directory and a minimal `node_modules` folder with only the necessary dependencies needed to run your app.
+
+```ts
+// next.config.ts
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+	output: "standalone",
+	// ...
+};
+
+export default nextConfig;
+```
+
+We then need to change the `runner` stage to copy the standalone build files instead of the entire `.next` folder:
+
+```dockerfile
+FROM base AS runner
+WORKDIR /app
+
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy the migrations folder
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/db/migrations ./apps/web/lib/db/migrations
+
+# Copy the package.json file
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/package.json .
+
+# Copy the Next.js build files
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
+
+EXPOSE 3000
+
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
+
+USER nextjs
+
+CMD ["pnpm", "start"]
+```
+
+After building the Docker image again, I was pleased to see that the size had dropped from **1.18GB** to **256.1MB**! 🎉
+
+This is a significant improvement, but I still wanted to see if I could go deeper.
+
+## Going deeper
+
+The base image I've been using is `node:23-alpine` which despite being one of the smaller Node.js images, clocks in at **160MB** in size.
+
+```bash
+$ docker images
+REPOSITORY   TAG         IMAGE ID       CREATED        SIZE
+node         23-alpine   46ab067cc8f3   5 weeks ago    160MB
+```
+
+Since all I need is a Node.js runtime and pnpm, I decided to try out using alpine as the base image instead which is only **8.17MB** in size.
+
+```bash
+$ docker images
+REPOSITORY   TAG         IMAGE ID       CREATED        SIZE
+alpine       3.21        8d591b0b7dea   2 months ago   8.17MB
+```
+
+I replaced the `node:23-alpine` base image with `alpine:3.21`.
+
+```dockerfile
+FROM alpine:3.21 AS base
+```
+
+Removed `corepack`, and installed `nodejs` and `pnpm` directly:
+
+```dockerfile
+# Install libc6-compat, nodejs, and pnpm
+RUN apk update ; apk add --no-cache libc6-compat nodejs pnpm
+
+# Configure pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+```
+
+Added `nodejs` to the `runner` stage:
+
+```dockerfile
+# Install nodejs to runner
+RUN apk add nodejs
+```
+
+And started the app directly with `node`:
+
+```dockerfile
+# Use node instead of pnpm
+CMD ["node", "./apps/web/server.js"]
+```
+
+Rebuilding the Docker image again shows that the size dropped from **256.1MB** to a puny **187MB**!
+
+Great! However, we don't have database migrations yet.
+
+## Migrating during runtime
+
+After doing some research, I found that Drizzle ORM has a built-in way to run migrations during runtime. Since this was my first time using Drizzle ORM, I wasn't aware of this feature and had been doing it the hard way the entire time.
+
+I opted to use the `migrate` function from the `drizzle-orm` package along with the [`instrumentation`](https://nextjs.org/docs/app/guides/instrumentation) file from Next.js.
+
+```ts
+// instrumentation.ts
+export async function register() {
+	// Only run this code when the runtime is Node.js
+	if (process.env.NEXT_RUNTIME === "nodejs") {
+		const path = await import("path");
+
+		// Dynamically import the migrate function and db client
+		const { migrate } = await import("drizzle-orm/node-postgres/migrator");
+		const { db } = await import("./lib/db/index");
+
+		// Run the migrations
+		await migrate(db, {
+			migrationsFolder: path.join(
+				process.cwd(),
+				"lib",
+				"db",
+				"migrations"
+			),
+		});
+	}
+}
+```
+
+The `instrumentation.ts` file exports a `register` function that is called once when a new Next.js server instance is initiated and executes for both Node.js and Edge runtimes.
+Since we are only interested in running the migrations when the runtime is Node.js, we check for that using the `NEXT_RUNTIME` env variable.
+
+We then dynamically import the `migrate` function from the `drizzle-orm` package and the `db` client from our own code.
+Finally, we call the `migrate` function with the database client and the path to the migrations folder.
+
+Now every time the app starts, it will run the migration function before accepting any requests.
+
+Our final Dockerfile looks like this:
+
+```dockerfile
+FROM alpine:3.21 AS base
+
+# Install libc6-compat, nodejs, and pnpm
+RUN apk update ; apk add --no-cache libc6-compat nodejs pnpm
+
+# Configure pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+# Prune the web app from the monorepo
+FROM base AS prune
+
+# Set working directory
+WORKDIR /app
+
+# Copy entire project and prune the web app
+COPY . .
+RUN pnpm dlx turbo prune --scope=@miru/web --docker
+
+# Install dependencies and build the project
+FROM base AS builder
+
+WORKDIR /app
+
+# First install the dependencies (as they change less often)
+COPY --from=prune /app/out/json/ .
+COPY --from=prune /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+
+# Set default environment variables
+ENV APP_ENV="production"
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build the project
+COPY --from=prune /app/out/full/ .
+RUN pnpm dlx turbo run build --filter=@miru/web
+
+FROM base AS runner
+WORKDIR /app
+
+# Install nodejs to runner
+RUN apk add nodejs
+
+# Don't run production as root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy the build output
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
+
+# Copy the migrations and drizzle.config.ts file
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/db/migrations ./apps/web/lib/db/migrations
+
+EXPOSE 3000
+
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
+
+USER nextjs
+CMD ["node", "./apps/web/server.js"]
+```
+
+Rebuilding the image one last time reveals the size of the Docker image has increased slightly to **187.4MB**.
+Going from **2.19GB** to **187.4MB** is a massive improvement, and I couldn't be happier with the results.
+
+## Conclusion
+
+It goes to show that when you take the time to investigate and optimize your code, you can achieve some pretty impressive results.
+I hope you found this article helpful and that it inspires you to take a closer look at your own Docker images and see if there are any optimizations you can make.
+
+If you have any questions or suggestions, feel free to reach out to me on [BlueSky](https://bsky.app/profile/tygr.dev) or join my [Discord server](https://nordstud.io/discord).
+
+If you want to see the full code, check out the [Miru GitHub repository](https://github.com/nord-studio/miru).
+
+See ya! (\*・ω・)ﾉ

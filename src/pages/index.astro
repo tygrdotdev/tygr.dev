@@ -1,0 +1,201 @@
+---
+export const prerender = true;
+
+import Card from "@/components/card.astro";
+import Link from "@/components/link.astro";
+import Tooltip from "@/components/tooltip.astro";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout>
+	<div class="flex flex-col items-start w-full gap-3">
+		<div class="flex flex-col">
+			<div class="w-full px-2 py-1 text-2xl text-white bg-black font-neue-haas-grotesk">
+				about me
+			</div>
+			<div class="p-2.5 flex flex-row items-start w-full border border-black">
+				<p>
+					yo, i&apos;m ty, aka tygrdev <span class="text-neutral-500">[or tygrxqt if you know me well enough]</span>. welcome to my form of virtual self-expression.
+					<br /><br />
+					i'm a self-taught web/iot developer with an interest in
+					building truely open alternative software and services for people who <i>care</i>. i'm currently a full stack software engineer at <Link href="https://circle.cloud">circle.cloud</Link> and i also founded <Link href="https://nordstud.io">Nord Studio</Link> and <Link href="https://masonrystudio.co.uk">Masonry Studio</Link>.
+					<br /><br />
+					you can reach me via the <Link href="https://nordstud.io/discord">Nord Studio Discord</Link>, or via email at hi (at) tygr (dot) dev for any questions, help with my work, or if you wanna say "hiii :3"
+				</p>
+			</div>
+		</div>
+		<Card title="likes and dislikes">
+			<span>
+				hover over each items to learn more.
+			</span>
+			<div class="grid w-full grid-cols-2 gap-4">
+				<div class="flex flex-col items-start w-full">
+					<div class="flex flex-row items-center w-full gap-2">
+						<svg class="size-4" data-name="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.82 20"><path d="M21.82 5.45c0-3.01-2.55-5.45-5.68-5.45-2.35 0-4.36 1.36-5.23 3.31C10.04 1.36 8.03 0 5.68 0 2.55 0 0 2.44 0 5.45 0 14.2 10.91 20 10.91 20s10.91-5.79 10.91-14.55" style="fill:#000;stroke-width:0"/></svg>
+						<span class="text-xl font-neue-haas-grotesk">
+							likes
+						</span>
+					</div>
+					<ul class="grid grid-cols-2 list-inside list-[square] w-full">
+						<li>
+							<Tooltip content="they're all so baby so cute">
+								<span>
+									cats
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="#1 wallows and machine girl fan">
+								<span>
+									music
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="'I want you to help me live' - Shōya Ishida">
+								<span>
+									anime
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="play boneworks, it's a life changing experience">
+								<span>
+									virtual reality
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="i'd marry homebrew if i could">
+								<span>
+									console modding
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="appreciate it while you can">
+								<span>
+									nature / outdoors
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="such a versatile way of transport and exercise">
+								<span>
+									biking
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="helvetica my beloved <3">
+								<span>
+									swiss design
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="literally the perfect food">
+								<span>
+									fajitas
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="old handhelds are superior, ds and psp on top!">
+								<span>
+									handhelds
+								</span>
+							</Tooltip>
+						</li>
+					</ul>
+				</div>
+				<div class="flex flex-col items-start w-full">
+					<div class="flex flex-row items-center w-full gap-2">
+						<svg class="size-4" data-name="x-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path style="fill:#000;stroke-width:0" d="M15.71 20 10 14.29 4.29 20 0 15.71 5.71 10 0 4.29 4.29 0 10 5.71 15.71 0 20 4.29 14.29 10 20 15.71 15.71 20z"/></svg>
+						<span class="text-xl font-neue-haas-grotesk">
+							dislikes
+						</span>
+					</div>
+					<ul class="grid grid-cols-2 list-inside list-[square] w-full">
+						<li>
+							<Tooltip content="makes my brain scream and sob">
+								<span>
+									sticky things
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="gives me headaches and makes me sticky">
+								<span>
+									being hot
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="i'm very insecure about my body">
+							<span>
+								tight clothes
+							</span>
+						</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="it's too loud, it smells like vomit, and there are people i don't know">
+							<span>
+								parties
+							</span>
+						</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="the night is peaceful, why waste it?">
+							<span>
+								sleeping early
+							</span>
+							</Tooltip>	
+						</li>
+						<li>
+							<Tooltip content="GET AWAY FROM ME AHHHH DIE DIE DIE DIE DIE">
+								<span>
+									flying bugs
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="i am overwhelmed and want to go home">
+							<span>
+								loud noises
+							</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="was a mistake, a sad excuse of a desktop 'app'">
+								<span>
+									electron
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="do i really need to explain this one?">
+								<span>
+									generative ai
+								</span>
+							</Tooltip>
+						</li>
+						<li>
+							<Tooltip content="i love all music, EXCEPT country.">
+								<span>
+									country music
+								</span>
+							</Tooltip>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</Card>
+		<Card title="why 'tygrdev'?">
+			<p>
+				my og screen name was 'tyger796', a blend between a nickname my mum gave me as a kid, and a number representing my family.
+				i realise now that having numbers in your screen name is yucky, so i replaced the '796' with 'dev' and later on removed the e, since i couldn't get a domain with 'tyger' in it.
+			</p>
+		</Card>
+	</div>
+</Layout>

@@ -1,0 +1,150 @@
+---
+export interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+---
+
+<div class="tooltip-container">
+  <div class="tooltip-trigger">
+    <slot />
+  </div>
+  <div class="tooltip-content" role="tooltip">
+    {content}
+  </div>
+</div>
+
+<style>
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip-trigger {
+    cursor: pointer;
+  }
+
+  .tooltip-content {
+    position: fixed;
+    background: white;
+    border: 1px solid black;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  .tooltip-content.show {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>
+
+<script>
+  class MouseFollowingTooltip {
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      const tooltipContainers = document.querySelectorAll('.tooltip-container');
+      
+      tooltipContainers.forEach(container => {
+        const trigger = container.querySelector('.tooltip-trigger') as HTMLDivElement | null;
+        const tooltip = container.querySelector('.tooltip-content') as HTMLDivElement | null;
+        
+        if (!trigger || !tooltip) return;
+
+        let isVisible = false;
+
+        const updateTooltipPosition = (x: number, y: number) => {
+          if (!isVisible) return;
+
+          // Simple offset from cursor
+          const offsetX = 10;
+          const offsetY = -35;
+          
+          // Get viewport dimensions
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+          
+          // Get tooltip dimensions
+          const tooltipRect = tooltip.getBoundingClientRect();
+          const tooltipWidth = tooltipRect.width;
+          const tooltipHeight = tooltipRect.height;
+          
+          // Calculate position with basic collision detection
+          let finalX = x + offsetX;
+          let finalY = y + offsetY;
+          
+          // Adjust if tooltip would go off right edge
+          if (finalX + tooltipWidth > viewportWidth) {
+            finalX = x - tooltipWidth - offsetX;
+          }
+          
+          // Adjust if tooltip would go off top edge
+          if (finalY < 0) {
+            finalY = y + offsetY + 45; // Show below cursor instead
+          }
+          
+          // Adjust if tooltip would go off bottom edge
+          if (finalY + tooltipHeight > viewportHeight) {
+            finalY = viewportHeight - tooltipHeight - 5;
+          }
+          
+          // Adjust if tooltip would go off left edge
+          if (finalX < 0) {
+            finalX = 5;
+          }
+
+          tooltip.style.left = `${finalX}px`;
+          tooltip.style.top = `${finalY}px`;
+        };
+
+        const showTooltip = () => {
+          isVisible = true;
+          tooltip.classList.add('show');
+        };
+
+        const hideTooltip = () => {
+          isVisible = false;
+          tooltip.classList.remove('show');
+        };
+
+        const handleMouseMove = (event: MouseEvent) => {
+          updateTooltipPosition(event.clientX, event.clientY);
+        };
+
+        // Event listeners
+        trigger.addEventListener('mouseenter', showTooltip);
+        trigger.addEventListener('mouseleave', hideTooltip);
+        trigger.addEventListener('mousemove', handleMouseMove);
+        
+        // Focus/blur for keyboard accessibility
+        trigger.addEventListener('focus', (event) => {
+          const rect = trigger.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          showTooltip();
+          updateTooltipPosition(centerX, centerY);
+        });
+        
+        trigger.addEventListener('blur', hideTooltip);
+      });
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new MouseFollowingTooltip());
+  } else {
+    new MouseFollowingTooltip();
+  }
+</script>

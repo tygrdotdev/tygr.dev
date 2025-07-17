@@ -1,0 +1,2 @@
+[images]
+  remote_images = ["https://i.scdn.co/.*", "https://lastfm.freetls.fastly.net/.*", "https://c.tenor.com/yAOQmB3Vyd4AAAAd/tenor.gif"]

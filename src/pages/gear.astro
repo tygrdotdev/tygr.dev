@@ -1,0 +1,153 @@
+---
+import Card from "@/components/card.astro";
+import Link from "@/components/link.astro";
+import Tooltip from "@/components/tooltip.astro";
+import Layout from "@/layouts/Layout.astro";
+
+---
+
+<Layout>
+	<div class="flex flex-col items-start w-full gap-3">
+		<div class="flex flex-col w-full">
+			<div class="w-full px-2 py-1 text-2	text-2xl text-white bg-black font-neue-haas-grotesk">
+				my gear
+			</div>
+			<div class="p-2.5 flex flex-row items-start w-full border border-black">
+				<p>
+					a comprehensive list of all the gear i use for both professional work and entertainment. hover over each items to learn more. 
+				</p>
+			</div>
+		</div>
+		<Card title="desktop">
+			<ul class="list-inside list-[square] w-full">
+				<li>
+					<a href="https://www.apple.com/mac-mini/" target="_blank">
+						<Tooltip content="my main computer, used to make cool shit (─‿‿─)♡">
+							Mac Mini M4
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.msi.com/Monitor/Optix-MAG241C/Specification" target="_blank">
+						<Tooltip content="my main monitor with a crisp 144Hz refresh rate (* ^ ω ^)">
+							MSI MAG241C Monitor
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.amazon.co.uk/Samsung-C24F390-24-Inch-Curved-Monitor/dp/B01BCF06LE" target="_blank">
+						<Tooltip content="my second monitor, dedicated to displaying discord, spotify or firefox xD">
+							Samsung C24F390 Monitor
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.apple.com/uk/shop/product/MWU53ZM/A/earpods-35mm-headphone-plug" target="_blank">
+						<Tooltip content="comfy, lightweight, and simple ♡(>ᴗ•)">
+							Apple Earbuds
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://fifinemicrophone.com/products/fifine-k690-usb-microphone" target="_blank">
+						<Tooltip content="extremely good budget mic, fifine the goat ＼(≧▽≦)／">
+							Fifine K690 Microphone
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.logitechg.com/en-us/products/gaming-mice/g502-hero-gaming-mouse.910-005469.html" target="_blank">
+						<Tooltip content="first mouse i used when i got my own pc years ago, don't fix something that isn't broken ┐(￣～￣)┌">
+							Logitech G502 HERO Mouse
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.lofree.co/products/lofree-block-wireless-mechanical-keyboard-1" target="_blank">
+						<Tooltip content="my first nice keyboard, got it as a present from a friend (/ =ω=)/">
+							Lofree Block Keyboard
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.ikea.com/gb/en/p/fredde-gaming-desk-black-50219044/" target="_blank">
+						<Tooltip content="hor hor hor hor hor hor hor hor hor hor ʕ •ᴥ• ʔ">
+							FREDDE Ikea Desk
+						</Tooltip>
+					</a>
+				</li>
+			</ul>
+		</Card>
+		<Card title="portable">
+			<ul class="list-inside list-[square] w-full">
+				<li>
+					<a href="https://www.apple.com/uk/macbook-pro/" target="_blank">
+						<Tooltip content="M-series chip my beloved (≧◡≦)">
+							MacBook Pro M3 14"
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.apple.com/iphone-16-pro/" target="_blank">
+						<Tooltip content="my current mobile phone, i finally caved in and switched back to an iphone ᕕ( ᐛ )ᕗ">
+							iPhone 16 Pro
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.apple.com/uk/airpods-4/" target="_blank">
+						<Tooltip content="i prefer the gen 2s but these get the job done ╮(︶︿︶)╭">
+							AirPods 4
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.bose.com/p/all-headphones/quietcomfort-se-headphones/QCSE-HEADPHONEARN-TRPBLK-WW.html" target="_blank">
+						<Tooltip content="listening to house music on these bad boys is generational (☆ω☆)">
+							Bose QuietComfort SE
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.bose.com/p/service-service-all-products/bose-soundlink-mini-ii-special-edition/SLMINIISE-SPEAKERWIRELESS.html" target="_blank">
+						<Tooltip content="yummy bass, yummy battery life, yummy yum yum ( • ⩊ • )">
+							Bose SoundLink Mini SE II
+						</Tooltip>
+					</a>
+				</li>
+			</ul>
+		</Card>
+		<Card title="consoles">
+			<ul class="list-inside list-[square] w-full">
+				<li>
+					<a href="https://www.nintendo.com/en-gb/Hardware/Nintendo-3DS-Family/Nintendo-3DS-XL/Nintendo-3DS-XL-727629.html" target="_blank">
+						<Tooltip content="had it since i was a kid, and of course its modded (･ω<)☆">
+							Nintendo 3DS XL
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://anbernic.com/en-gb/products/rg35xx-plus" target="_blank">
+						<Tooltip content="a cute little emulation handheld, with a nostalgic body :3">
+							Anbernic RG35XX Plus
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://store.steampowered.com/steamdeck" target="_blank">
+						<Tooltip content="one of my best impulse purchases of all time ( ´ ꒳ ` ) ♡">
+							Steam Deck
+						</Tooltip>
+					</a>
+				</li>
+				<li>
+					<a href="https://pcnight.com/desktop/acer-nitro-50-600/" target="_blank">
+						<Tooltip content="moved to my tv and use it as a sort of steam machine (─‿‿─)">
+							Acer Nitro N50-600
+						</Tooltip>
+					</a>
+				</li>
+			</ul>
+		</Card>
+	</div>
+</Layout>

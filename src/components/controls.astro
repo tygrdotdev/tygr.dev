@@ -1,0 +1,28 @@
+---
+---
+
+<script>
+	const nekoControl: HTMLInputElement | null = document.querySelector("#neko-control");
+	if (nekoControl) {
+		nekoControl.checked = window.localStorage.getItem("neko") === "true";
+		nekoControl.addEventListener("change", (e) => {
+			if ((e.target as HTMLInputElement).checked) {
+				localStorage.setItem("neko", "true");
+				window.location.reload();
+			} else {
+				localStorage.setItem("neko", "false");
+				window.location.reload();
+			}
+		})
+	} 
+</script>
+<div class="flex flex-col items-start border border-black">
+	<div class="px-1 py-0.5 text-lg font-neue-haas-grotesk border-b border-black w-full">
+		controls
+	</div>
+	<div class="px-1 py-0.5 flex flex-col gap-0.5 w-full">
+		<div class="flex flex-row items-center gap-2">
+			<input type="checkbox" id="neko-control" /> <span>disable neko</span>
+		</div>
+	</div>
+</div>

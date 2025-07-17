@@ -1,0 +1,56 @@
+---
+export const prerender = true;
+
+import { formatDate } from "@/pages/blog/utils";
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+import Image from "astro/components/Image.astro"
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import readingTime from "reading-time";
+import MdxImage from "@/components/mdx-image.astro";
+import Link from "@/components/link.astro"
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+
+  return posts.map(post => ({
+    params: { slug: post.id }, props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+if (!post) return Astro.redirect("/404");
+
+const { Content } = await render(post);
+---
+
+<BlogLayout>
+  <div class="flex flex-col gap-2">
+    <h1 class="font-neue-haas-grotesk text-3xl sm:text-4xl">
+      {post.data.title}
+    </h1>
+    <div class="flex flex-row items-center justify-between gap-4">
+      <div class="flex flex-row items-center gap-2">
+        <span
+          class="items-center"
+        >
+          {formatDate(post.data.publishedAt)}
+        </span>
+      </div>
+      <p>
+        {readingTime(post.body ?? "").text}
+      </p>
+    </div>
+    <Image
+      src={post.data.hero}
+      alt="hero"
+      height={600}
+      width={850}
+      class="mt-4 border border-black grayscale hover:grayscale-0 w-full h-full"
+    />
+  </div>
+  <div class="prose-headings:font-normal prose-h1:mb-0 prose-headings:not-[h1]:mb-2 prose-img:w-full prose-pre:rounded-none prose prose-neutral prose-md max-w-full prose-headings:font-neue-haas-grotesk pt-8">
+    <Content components={{ img: MdxImage, a: Link }} />
+  </div>
+</BlogLayout>

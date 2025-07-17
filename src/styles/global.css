@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+	font-family: "ArkPixel";
+	src: url("/fonts/ark-pixel.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Neue Haas Grotesk";
+	src: url("/fonts/neue-haas-grotesk.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@theme {
+	--font-ark: "ArkPixel", "sans-serif";
+	--font-neue-haas-grotesk: "Neue Haas Grotesk", "sans-serif";
+}
