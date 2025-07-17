@@ -128,7 +128,7 @@ const { content } = Astro.props;
         trigger.addEventListener('mousemove', handleMouseMove);
         
         // Focus/blur for keyboard accessibility
-        trigger.addEventListener('focus', (event) => {
+        trigger.addEventListener('focus', () => {
           const rect = trigger.getBoundingClientRect();
           const centerX = rect.left + rect.width / 2;
           const centerY = rect.top + rect.height / 2;
