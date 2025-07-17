@@ -97,9 +97,9 @@ export interface Disallows {
 }
 
 export async function getAccessToken() {
-	const refresh_token = import.meta.env.SPOTIFY_REFRESH_TOKEN;
-	const client_id = import.meta.env.SPOTIFY_CLIENT_ID;
-	const client_secret = import.meta.env.SPOTIFY_CLIENT_SECRET;
+	const refresh_token = import.meta.env.SPOTIFY_REFRESH_TOKEN ?? process.env.SPOTIFY_REFRESH_TOKEN;
+	const client_id = import.meta.env.SPOTIFY_CLIENT_ID ?? process.env.SPOTIFY_CLIENT_ID;
+	const client_secret = import.meta.env.SPOTIFY_CLIENT_SECRET ?? process.env.SPOTIFY_CLIENT_SECRET;
 
 	if (typeof refresh_token !== "string") {
 		throw new Error("No refresh token found");
@@ -116,7 +116,7 @@ export async function getAccessToken() {
 	const res = await fetch("https://accounts.spotify.com/api/token", {
 		method: "POST",
 		headers: {
-			Authorization: `Basic ${Buffer.from(`${import.meta.env.SPOTIFY_CLIENT_ID}:${import.meta.env.SPOTIFY_CLIENT_SECRET}`).toString("base64")}`,
+			Authorization: `Basic ${Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`).toString("base64")}`,
 			"Content-Type": "application/x-www-form-urlencoded",
 		},
 		body: new URLSearchParams({

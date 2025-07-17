@@ -45,8 +45,19 @@ export interface Attr2 {
 }
 
 export async function getTopAlbums(): Promise<TopAlbumData | null> {
+	const user = import.meta.env.LASTFM_USER ?? process.env.LASTFM_USER;
+	const key = import.meta.env.LASTFM_API_KEY ?? process.env.LASTFM_API_KEY;
+
+	if (typeof user !== "string") {
+		throw new Error("No last.fm user found");
+	}
+
+	if (typeof key !== "string") {
+		throw new Error("No last.fm key found");
+	}
+
 	const data = await fetch(
-		`https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${import.meta.env.LASTFM_USER}&api_key=${import.meta.env.LASTFM_API_KEY}&format=json`,
+		`https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${process.env.LASTFM_USER}&api_key=${process.env.LASTFM_API_KEY}&format=json`,
 		{ headers: {
 			"Cache-Control": "max-age=86400"
 		}}
